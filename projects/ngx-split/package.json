@@ -1,6 +1,12 @@
 {
-  "name": "ngx-split",
+  "name": "ngx-ui-split",
   "version": "0.0.1",
+  "author":{
+    "name": "aspojo",
+    "email": "logbug@aliyun.com",
+    "url": "https://github.com/aspojo"
+  },
+  "homepage": "https://github.com/aspojo/split-prj",
   "peerDependencies": {
     "@angular/common": "^6.0.0-rc.0 || ^6.0.0",
     "@angular/core": "^6.0.0-rc.0 || ^6.0.0"

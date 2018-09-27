@@ -1,6 +1,12 @@
 {
   "name": "split-prj",
   "version": "0.0.0",
+  "author":{
+    "name": "aspojo",
+    "email": "logbug@aliyun.com",
+    "url": "https://github.com/aspojo"
+  },
+  "homepage": "https://github.com/aspojo/split-prj",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -8,7 +14,9 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "build lib ngx-split": "ng build ngx-split"
+    "build-lib": "ng build ngx-split",
+    "publish-lib": "npm publish ./dist/ngx-split",
+    "publish-lib:next": "npm publish --tag next ./dist/ngx-split"
   },
   "private": true,
   "dependencies": {
