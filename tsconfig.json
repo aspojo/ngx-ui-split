@@ -16,6 +16,14 @@
     "lib": [
       "es2017",
       "dom"
-    ]
+    ],
+    "paths": {
+      "ngx-split": [
+        "dist/ngx-split"
+      ],
+      "ngx-split/*": [
+        "dist/ngx-split/*"
+      ]
+    }
   }
 }
