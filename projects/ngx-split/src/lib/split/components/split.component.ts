@@ -259,6 +259,7 @@ export class SplitComponent implements AfterViewInit, OnDestroy {
     sizePercentA: 0,
     sizePercentB: 0,
   };
+  dragCover: any;
 
   constructor(private ngZone: NgZone,
               private elRef: ElementRef,
@@ -439,6 +440,16 @@ export class SplitComponent implements AfterViewInit, OnDestroy {
   public startDragging(startEvent: MouseEvent | TouchEvent, gutterOrder: number, gutterNum: number): void {
     startEvent.preventDefault();
 
+    this.dragCover = this.renderer.createElement('div');
+
+
+    this.renderer.setStyle(this.dragCover, 'position', 'fixed');
+    this.renderer.setStyle(this.dragCover, 'left', '0');
+    this.renderer.setStyle(this.dragCover, 'right', '0');
+    this.renderer.setStyle(this.dragCover, 'top', '0');
+    this.renderer.setStyle(this.dragCover, 'bottom', '0');
+    this.renderer.setStyle(this.dragCover, 'z-index', '987654321');
+    this.renderer.appendChild(window.document.body, this.dragCover);
     // Place code here to allow '(gutterClick)' event even if '[disabled]="true"'.
     this.currentGutterNum = gutterNum;
     this.draggingWithoutMove = true;
@@ -482,8 +493,8 @@ export class SplitComponent implements AfterViewInit, OnDestroy {
     }
 
     this.ngZone.runOutsideAngular(() => {
-      this.dragListeners.push(this.renderer.listen('document', 'mousemove', (e: MouseEvent) => this.dragEvent(e, start, areaA, areaB)));
-      this.dragListeners.push(this.renderer.listen('document', 'touchmove', (e: TouchEvent) => this.dragEvent(e, start, areaA, areaB)));
+      this.dragListeners.push(this.renderer.listen('window', 'mousemove', (e: MouseEvent) => this.dragEvent(e, start, areaA, areaB)));
+      this.dragListeners.push(this.renderer.listen('window', 'touchmove', (e: TouchEvent) => this.dragEvent(e, start, areaA, areaB)));
     });
 
     areaA.comp.lockEvents();
@@ -577,6 +588,7 @@ export class SplitComponent implements AfterViewInit, OnDestroy {
       return;
     }
 
+    this.renderer.removeChild(window.document.body, this.dragCover);
     this.displayedAreas.forEach(area => {
       area.comp.unlockEvents();
     });
